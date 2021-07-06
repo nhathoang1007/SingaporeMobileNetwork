@@ -60,10 +60,16 @@ public class Entry extends BaseEntry implements Parcelable {
     }
 
     private String label;
-    public Entry(float x, float y, Drawable icon, String label) {
+    private boolean isDecreaseValue;
+    public Entry(float x, float y, Drawable icon, String label, boolean isDecreaseValue) {
         super(y, icon);
         this.x = x;
         this.label = label;
+        this.isDecreaseValue = isDecreaseValue;
+    }
+
+    public boolean isDecreaseValue() {
+        return isDecreaseValue;
     }
 
     public String getLabel() {

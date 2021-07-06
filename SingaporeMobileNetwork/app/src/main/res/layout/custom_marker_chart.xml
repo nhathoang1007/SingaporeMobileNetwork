@@ -19,6 +19,7 @@
         android:textColor="@color/white"
         android:textSize="10sp" />
     <View
+        android:id="@+id/bottom_view"
         android:layout_width="4dp"
         android:layout_height="4dp"
         android:rotation="45"

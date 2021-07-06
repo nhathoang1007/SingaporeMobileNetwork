@@ -2,6 +2,8 @@ package com.example.coroutines.model
 
 import com.example.coroutines.extensions.getDefault
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 
 class Response constructor(
     val help: String,
@@ -11,8 +13,9 @@ class Response constructor(
 
 class Result constructor(
     @SerializedName("resource_id")
-    val resourceId: String?,
-    val records: MutableList<Record>?
+    val resourceId: String? = null,
+    val records: MutableList<Record>? = null,
+    val total: Int = 0
 ) {
     fun getChartData(): Pair<MutableList<Float>, MutableList<String>> {
         val list = mutableListOf<Float>()
@@ -32,13 +35,14 @@ class Result constructor(
 }
 
 
-class Record constructor(
+open class Record constructor(
     @SerializedName("_id")
-    val id: String?,
+    @PrimaryKey
+    var id: String = "",
     @SerializedName("volume_of_mobile_data")
-    val volumeOfMobileData: String?,
-    val quarter: String?
-) {
+    var volumeOfMobileData: String? = null,
+    var quarter: String? = null
+): RealmObject() {
     fun getYear(): Int {
         val value = quarter?.split("-")
         if (value?.size == 2) {

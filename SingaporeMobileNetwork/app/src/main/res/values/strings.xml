@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Daily Workout</string>
-
-    <string name="exercises_size">%s exercises</string>
-    <string name="completed">Completed</string>
-    <string name="missed">Missed</string>
-    <string name="assigned">Assigned</string>
+    <string name="app_name">Mobile Data Usage</string>
+    <string name="unauthorized_user">Unauthorised User</string>
+    <string name="forbidden">Request is forbidden</string>
+    <string name="internal_server_error">Internal Server Error</string>
+    <string name="wrong_data_format">Wrong data format</string>
+    <string name="bad_request">Bad Request</string>
+    <string name="no_internet">No Internet Connection</string>
 </resources>

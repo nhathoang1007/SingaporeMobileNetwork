@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.BindingAdapter
 import androidx.databinding.ViewDataBinding
 import com.example.coroutines.R
 import com.example.coroutines.databinding.CustomChartLayoutBinding
@@ -22,7 +23,6 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import kotlinx.android.synthetic.main.custom_chart_layout.view.*
 import kotlin.math.max
 
 /**
@@ -42,52 +42,42 @@ class CustomLineChart @JvmOverloads constructor(
         return binding
     }
 
-    fun setData(data: Pair<MutableList<Float>, MutableList<String>>) {
-        initChart(lineChart, data)
-        /*Set market default at end of chasrt*/
-//        setHighLightPosition(data.size - 1)
-    }
+    fun initChart(data: Pair<MutableList<Float>, MutableList<String>>) {
+        binding.lineChart.let { chart ->
+            run {
+                chart.setBackgroundColor(Color.WHITE)
+                chart.description.isEnabled = false
+                chart.setTouchEnabled(true)
 
-    fun setHighLightPosition(position: Int) {
-        lineChart.highlightValue(position.toFloat(), 0)
-        lineChart.notifyDataSetChanged()
-    }
+                chart.setOnChartValueSelectedListener(this)
+                chart.setDrawGridBackground(false)
 
-    private fun initChart(chart: LineChart, data: Pair<MutableList<Float>, MutableList<String>>) {
-        run {
-            chart.setBackgroundColor(Color.WHITE)
-            chart.description.isEnabled = false
-            chart.setTouchEnabled(true)
+                val mv = CustomMarkerView(context)
+                mv.chartView = chart
+                chart.marker = mv
+                chart.setDrawMarkers(true)
+                chart.onRtlPropertiesChanged(View.LAYOUT_DIRECTION_RTL)
 
-            chart.setOnChartValueSelectedListener(this)
-            chart.setDrawGridBackground(false)
+                chart.isDragEnabled = false
+                chart.setPinchZoom(false)
+                chart.isDoubleTapToZoomEnabled = false
+                chart.setScaleEnabled(false)
+            }
 
-            val mv = CustomMarkerView(context)
-            mv.chartView = chart
-            chart.marker = mv
-            chart.setDrawMarkers(true)
-            chart.onRtlPropertiesChanged(View.LAYOUT_DIRECTION_RTL)
-
-            chart.isDragEnabled = false
-            chart.setPinchZoom(false)
-            chart.isDoubleTapToZoomEnabled = false
-            chart.setScaleEnabled(false)
+            chart.axisRight.isEnabled = false
+            chart.axisLeft.isEnabled = true
+            chart.xAxis.isEnabled = true
+            chart.xAxis.setCenterAxisLabels(true)
+            chart.xAxis.position = XAxisPosition.BOTTOM
+            chart.xAxis.setLabelCount(12, true)
+            chart.axisLeft.axisMinimum = -5f
+            kotlin.runCatching {
+                chart.axisLeft.axisMaximum = data.first.maxOf { it } + 5f
+            }
+            setData(chart, data)
+            chart.animateX(1000)
+            chart.legend.form = Legend.LegendForm.LINE
         }
-
-        chart.axisRight.isEnabled = false
-        chart.axisLeft.isEnabled = true
-        chart.xAxis.isEnabled = true
-        chart.xAxis.setCenterAxisLabels(true)
-        chart.xAxis.position = XAxisPosition.BOTTOM
-        chart.xAxis.setLabelCount(12, true)
-        chart.axisLeft.axisMinimum = -5f
-        chart.axisLeft.axisMaximum = data.first.maxOf { it } + 5f
-        setData(chart, data)
-        chart.animateX(1000)
-        // get the legend (only possible after setting data)
-        val l = chart.legend
-        // draw legend entries as lines
-        l.form = Legend.LegendForm.LINE
     }
 
     private fun setData(chart: LineChart, data: Pair<MutableList<Float>, MutableList<String>>) {
@@ -101,19 +91,23 @@ class CustomLineChart @JvmOverloads constructor(
         val values = java.util.ArrayList<Entry>()
 
         data.first.forEachIndexed { i, fl ->
+            val isDecreaseValue: Boolean = i > 0 && fl < data.first[i - 1]
             values.add(
                 Entry(
                     i.toFloat(),
                     fl,
-                    ContextCompat.getDrawable(context, when {
-                        i > 0 && fl < data.first[i - 1] -> {
-                            R.drawable.ic_circle_red
+                    ContextCompat.getDrawable(
+                        context, when {
+                            isDecreaseValue -> {
+                                R.drawable.ic_circle_red
+                            }
+                            else -> {
+                                R.drawable.ic_circle_blue
+                            }
                         }
-                        else -> {
-                            R.drawable.ic_circle_blue
-                        }
-                    }),
-                    data.second[i]
+                    ),
+                    data.second[i],
+                    isDecreaseValue
                 )
             )
         }
@@ -128,9 +122,9 @@ class CustomLineChart @JvmOverloads constructor(
         } else {
             set1 = LineDataSet(values, null)
             set1.setDrawIcons(true)
-            set1.color = Color.parseColor("#7470EF")
+            set1.color = Color.parseColor("#FF7470EF")
             set1.setDrawCircles(false)
-            set1.lineWidth = 2f
+            set1.lineWidth = 1.5f
             set1.setDrawCircleHole(false)
             set1.setDrawValues(false)
             set1.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
@@ -148,5 +142,15 @@ class CustomLineChart @JvmOverloads constructor(
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
+    }
+
+    companion object {
+        @BindingAdapter("app:initData")
+        @JvmStatic
+        fun CustomLineChart.initData(result: Result?) {
+            result?.getChartData()?.let {
+                initChart(it)
+            }
+        }
     }
 }

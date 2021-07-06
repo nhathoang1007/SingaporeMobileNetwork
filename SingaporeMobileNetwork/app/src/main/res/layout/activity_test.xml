@@ -9,22 +9,31 @@
 
         <variable
             name="iView"
-            type="com.example.coroutines.view.test.TestView" />
+            type="com.example.coroutines.view.TestView" />
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_24sdp"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_25sdp"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.example.coroutines.customize.view.CustomLineChart
             android:id="@+id/custom_line_chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_workout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:bindAdapter="@{iView.MAdapter}"
-            app:initLinear="@{RecyclerView.VERTICAL}" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            app:initData="@{iView.MViewModel.dataObs}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

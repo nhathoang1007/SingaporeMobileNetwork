@@ -80,8 +80,8 @@ ext.deps = [
                 navigating_compose: "androidx.navigation:navigation-compose:2.4.0-alpha02"
         ],
         test          : [
-                runner: "androidx.test:runner:1.3.0-alpha02",
-                core  : "androidx.test.espresso:espresso-core:3.3.0-alpha02",
+                runner: "androidx.test:runner:1.4.0",
+                core  : "androidx.test.espresso:espresso-core:3.4.0",
                 junit : "junit:junit:4.12",
         ]
 ]

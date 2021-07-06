@@ -1,12 +1,15 @@
 package com.example.coroutines.customize.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
+import androidx.core.content.ContextCompat.getColor
 import com.example.coroutines.R
 import com.example.coroutines.extensions.dp
 import com.example.coroutines.extensions.getDefault
@@ -26,7 +29,12 @@ class CustomMarkerView(context: Context) : MarkerView(context, R.layout.custom_m
         val span = SpannableStringBuilder("$label\n$value")
         span.setSpan(StyleSpan(Typeface.BOLD), 0, label.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         span.setSpan(RelativeSizeSpan(1.2f), 0, label.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tvValue?.text = span
+        val color = ColorStateList.valueOf(Color.parseColor(if (e?.isDecreaseValue.getDefault()) "#FF5E5E" else "#7470EF"))
+        tvValue?.apply {
+            text = span
+            backgroundTintList = color
+        }
+        bottom_view?.backgroundTintList = color
         super.refreshContent(e, highlight)
     }
 

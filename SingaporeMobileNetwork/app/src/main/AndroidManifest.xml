@@ -7,14 +7,14 @@
     <application
         android:name=".coroutines.MyApp"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_logo"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ObservableResearch">
-        <activity android:name=".view.test.TestActivity">
+        <activity android:name=".view.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

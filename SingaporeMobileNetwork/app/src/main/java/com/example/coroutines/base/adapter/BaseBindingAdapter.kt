@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by Nhat.vo on 17/11/2020.
  */
 abstract class BaseBindingAdapter<V : ViewDataBinding, T>(val onClicked: ((T?) -> Unit)? = null) :
-    RecyclerView.Adapter<com.example.coroutines.base.adapter.BaseViewHolder<V>>() {
+    RecyclerView.Adapter<BaseViewHolder<V>>() {
 
     val list: MutableList<T> = mutableListOf()
     var parentWidth = 0
@@ -30,7 +30,7 @@ abstract class BaseBindingAdapter<V : ViewDataBinding, T>(val onClicked: ((T?) -
             false
         )
 
-        return com.example.coroutines.base.adapter.BaseViewHolder(binding)
+        return BaseViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: com.example.coroutines.base.adapter.BaseViewHolder<V>, position: Int) {

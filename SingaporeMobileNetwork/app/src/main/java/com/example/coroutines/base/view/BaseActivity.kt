@@ -3,18 +3,27 @@ package com.example.coroutines.base.view
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
+import com.blankj.utilcode.util.Utils
+import com.example.coroutines.R
+import com.example.coroutines.base.BaseViewModel
 import com.example.coroutines.coroutines.MyApp
 import com.example.coroutines.base.viewmodel.DataState
 import com.example.coroutines.customize.dialog.LoadingDialog
 import com.example.coroutines.extensions.logError
+import com.google.gson.JsonSyntaxException
+import io.realm.Realm
+import org.koin.core.context.KoinContextHandler
+import retrofit2.HttpException
+import java.net.UnknownHostException
+import javax.net.ssl.HttpsURLConnection
 
-abstract class BaseActivity<V : ViewDataBinding, VM : com.example.coroutines.base.BaseViewModel> : AppCompatActivity(),
-    com.example.coroutines.base.view.BaseView<VM> {
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity(), BaseView<VM> {
 
     protected val TAG = this::class.simpleName
 
@@ -52,7 +61,9 @@ abstract class BaseActivity<V : ViewDataBinding, VM : com.example.coroutines.bas
     }
 
     override fun handelError(error: DataState.Failure) {
-        Log.d(TAG, "TODO Handel error here!")
+        error.getErrorMessage()?.let {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun handelLoading(state: DataState.Loading) {
@@ -66,4 +77,9 @@ abstract class BaseActivity<V : ViewDataBinding, VM : com.example.coroutines.bas
 
     override val mContext: Context
         get() = MyApp.getApplicationContext()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        KoinContextHandler.stop()
+    }
 }
