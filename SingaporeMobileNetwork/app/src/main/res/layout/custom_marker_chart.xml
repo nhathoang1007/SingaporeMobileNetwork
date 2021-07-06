@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lnValue"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginHorizontal="@dimen/_4sdp"
+        android:background="@drawable/ic_tag"
+        android:gravity="center|top"
+        android:padding="@dimen/_4sdp"
+        android:textColor="@color/white"
+        android:textSize="10sp" />
+    <View
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:rotation="45"
+        android:translationY="-2dp"
+        android:background="@color/color_blue"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_marker_chart" />
+
+</LinearLayout>

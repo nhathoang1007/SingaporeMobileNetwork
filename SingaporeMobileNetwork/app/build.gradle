@@ -1,0 +1,85 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'realm-android'
+}
+
+apply from: rootProject.file("dependencies.gradle")
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.example.observableresearch"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        dataBinding true
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src/main/assets'
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.support.kotlin
+    implementation deps.support.app_compat
+    implementation deps.support.core
+    implementation deps.support.material
+    implementation deps.support.constraint_layout
+    implementation project(path: ':MPChartLib')
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.core
+    implementation deps.support.sdp
+    implementation deps.perfomance.multidex
+    implementation deps.perfomance.rxjava
+    implementation deps.perfomance.rxandroid
+    implementation deps.resful.converter
+    implementation deps.resful.rx_retrofit
+    implementation deps.resful.retrofit2
+    implementation deps.resful.logd
+    implementation deps.resful.logging
+    implementation deps.lifecycler.extension
+    implementation deps.lifecycler.viewmodel
+    implementation deps.lifecycler.java8
+    implementation deps.resful.gson
+    kapt deps.support.databinding
+    implementation deps.di.koin
+    implementation deps.di.koin_androix
+    implementation deps.di.koin_viewmodel
+    implementation deps.webrtc
+    implementation deps.support.image
+    implementation deps.jetpack.navigating_compose
+
+    implementation(deps.resful.socket) {
+        exclude group: 'org.json', module: 'json'
+    }
+}

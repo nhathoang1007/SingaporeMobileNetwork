@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2021-06-14T15:00:00",
+    "name": "Legs day",
+    "status": 2,
+    "exerciseCount": 5
+  },
+  {
+    "timestamp": "2021-06-15T15:00:00",
+    "name": "Full warm up workout",
+    "status": 1,
+    "exerciseCount": 3
+  },
+  {
+    "timestamp": "2021-06-17T15:00:00",
+    "name": "Chest and shoulder workout",
+    "status": 1,
+    "exerciseCount": 9
+  },
+  {
+    "timestamp": "2021-06-18T15:00:00",
+    "name": "Legs day",
+    "status": 1,
+    "exerciseCount": 7
+  },
+  {
+    "timestamp": "2021-06-18T15:00:00",
+    "name": "HIIT Tabata 20:10 8x8",
+    "status": 1,
+    "exerciseCount": 15
+  },
+  {
+    "timestamp": "2021-06-20T15:00:00",
+    "name": "Squat, press, power clean",
+    "status": 1,
+    "exerciseCount": 6
+  }
+]

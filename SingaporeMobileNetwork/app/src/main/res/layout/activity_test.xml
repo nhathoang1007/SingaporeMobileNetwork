@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="androidx.recyclerview.widget.RecyclerView" />
+
+        <variable
+            name="iView"
+            type="com.example.coroutines.view.test.TestView" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.example.coroutines.customize.view.CustomLineChart
+            android:id="@+id/custom_line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_workout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:bindAdapter="@{iView.MAdapter}"
+            app:initLinear="@{RecyclerView.VERTICAL}" />
+    </LinearLayout>
+</layout>
