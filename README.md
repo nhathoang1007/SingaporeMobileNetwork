@@ -24,4 +24,6 @@ This is guildline for [Singapore Mobile Network] android source code
 - Retrofit 2
  
 # Features
-
+- Mobile Data Network Chart
+- UI Test
+- Unit Test
