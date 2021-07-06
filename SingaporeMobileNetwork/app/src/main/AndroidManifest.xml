@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.coroutines">
+    package="com.example.koin">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".coroutines.MyApp"
+        android:name="com.example.koin.coroutines.MyApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
         android:requestLegacyExternalStorage="true"
@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.ObservableResearch">
-        <activity android:name=".view.TestActivity">
+        <activity android:name="com.example.koin.view.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
