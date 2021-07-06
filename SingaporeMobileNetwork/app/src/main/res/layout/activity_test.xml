@@ -9,7 +9,7 @@
 
         <variable
             name="iView"
-            type="com.example.coroutines.view.TestView" />
+            type="com.example.koin.view.TestView" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,7 @@
             android:textSize="@dimen/_25sdp"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.example.coroutines.customize.view.CustomLineChart
+        <com.example.koin.customize.view.CustomLineChart
             android:id="@+id/custom_line_chart"
             android:layout_width="match_parent"
             android:layout_height="0dp"

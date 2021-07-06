@@ -13,13 +13,13 @@ android {
     buildToolsVersion "30.0.3"
     testOptions.unitTests.includeAndroidResources = true
     defaultConfig {
-        applicationId "com.example.coroutines"
+        applicationId "com.example.koin"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "com.example.coroutines.MockTestRunner"
+        testInstrumentationRunner "com.example.koin.MockTestRunner"
     }
 
     packagingOptions {
